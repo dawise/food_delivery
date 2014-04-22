@@ -1,10 +1,10 @@
 class Order
 
-attr_accessor :done, :late
+attr_accessor :done, :late, :delivery_time
 
   @@id = 0
 
-  def initialize(customer_id, delivery_boy)
+  def initialize(customer_id, delivery_boy, restaurant)
     @meals = {}
     @id = @@id + 1
     @@id += 1
@@ -12,9 +12,24 @@ attr_accessor :done, :late
     @customer_id = customer_id
     @delivery_boy_id = delivery_boy_id
     @order_time = Time.now
-    @delivery_time = @order_time + (5 * 60)
+    @deadline = @order_time + (5 * 60)
+    @delivery_time = "Not delivered yed"
     @late = false
     @done = false
+    @restaurant = restaurant
+
+    @restaurants.customers.each do |customer|
+      if @customer_id == customer.id
+        @customer_name = customer.full_name
+        @customer_phone = customer.phone_num
+        @customer_adress = customer.adress
+      end
+    end
+    @restaurants.delivery_boys.each do |delivery_boy|
+      if @delivery_boy_id == delivery_boy.id
+        @delivery_boy_name = delivery_boy.full_name
+      end
+    end
   end
 
   def add_meal(meal, quantity)
@@ -32,9 +47,9 @@ attr_accessor :done, :late
   def check_status
     #TODO update @late
     unless done == true
-      @late = true if @delivery_time < Time.now
+      @late = true if @deadline < Time.now
     else
-      @late = true if @delivery_time < #missing variable
+      @late = true if @deadline < @delivery_time
     end
 
     if @late && @done
@@ -50,12 +65,13 @@ attr_accessor :done, :late
 
 
   def to_s
-    " Order : #{@id} \n
-      Customer : #{} \n
-      Customer adress : #{} \n
-      Delivery boy : #{} \n
-      Order time : #{} \n
-      Delivery time : #{} \n
+    " Order : #{@id}\n
+      Customer : #{@customer_name} \n
+      Customer phone : #{@customer_phone} \n
+      Customer adress : #{@customer_adress} \n
+      Delivery boy : #{@delivery_boy_name} \n
+      Order time : #{@order_time} \n
+      Delivery time : #{@delivery_time} \n
 
       "
   end

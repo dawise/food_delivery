@@ -2,6 +2,8 @@ require_relative 'manager'
 
 class Customer < Person
 
+  attr_reader :full_name
+
   def initialize(last_name, first_name, restaurant)
     super(last_name, first_name, id, full_name)
     @adress = adress

@@ -14,7 +14,16 @@ class DeliveryBoy < Employee
 
   end
 
-  def order_delivered
+  def order_delivered(order_id)
+
+    @restaurant.orders.each do |order|
+
+      if order.id == order_id
+        order.done = true
+        order.delivery_time = Time.now
+      end
+    end
+
 
   end
 
