@@ -4,9 +4,11 @@ class Person
 
   @@id = 0
 
-  def initialize(last_name, first_name)
-  @last_name = last_name
+  def initialize(first_name, last_name, password, restaurant)
   @first_name = first_name
+  @last_name = last_name
+  @password = password
+  @restaurant = restaurant
   @full_name = "#{@first_name} #{@last_name}"
   @id = @@id +1
   @@id += 1

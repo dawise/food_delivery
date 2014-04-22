@@ -1,18 +1,19 @@
+require_relative 'person'
+require_relative 'restaurant'
+require_relative 'customer'
+require_relative 'delivery_boy'
+require_relative 'employee'
 require_relative 'manager'
+require_relative 'meal'
+require_relative 'order'
 
+chez_dede = Restaurant.new("Chez Dédé", "25 rue du Petit Musc", "0147382712")
 
-restaurant1 = Restaurant.new
+dede = Manager.new("Dédé", "Lafrite", "azerty", chez_dede)
 
-manager1 = Manager.new
+dede.add_delivery_boy("Jacques", "Lebon", "blabla")
+dede.add_delivery_boy("Nicolas", "Lebrun", "blabla")
 
-manager1.add_order
+dede.add_customer("Olivier", "Go")
 
-
-display_history_orders(manager1.restaurant)
-#Manager.add_order
-
-# puts "Which meal ?"
-#     meal = gets.chomp
-#     puts "Which qty ?"
-#     quantity = gets.chomp
-#     order.add_meal(meal, quantity)
+puts dede.list_customers

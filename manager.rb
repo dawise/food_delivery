@@ -1,3 +1,5 @@
+require_relative 'person'
+require_relative 'employee'
 require_relative 'order'
 
 class Manager < Employee
@@ -5,8 +7,7 @@ class Manager < Employee
   attr_reader :full_name, :id, :restaurant
 
   def initialize(first_name, last_name, password, restaurant)
-    super(username, password, full_name, id)
-    @restaurant = restaurant
+    super(first_name, last_name, password, restaurant)
   end
 
   def add_order(customer_id, delivery_boy)
@@ -26,13 +27,15 @@ class Manager < Employee
   end
 
   def add_customer(first_name, last_name)
-    @restaurant.customers << Customer.new(first_name ,last_name, @restaurant)
+    @restaurant.customers << Customer.new(first_name ,last_name, "nopasswordneeded", @restaurant)
+  end
+
+  def list_customers
+    @restaurant.customers
   end
 
   def list_delivery_boys
-    @restaurant.delivery_boys.each do |delivery_boy|
-      puts "#{delivery_boy.id} : #{delivery_boy.full_name}"
-    end
+    @restaurant.delivery_boys
   end
 
   def add_delivery_boy(first_name, last_name, password)

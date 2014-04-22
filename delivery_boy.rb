@@ -1,10 +1,10 @@
-require_relative 'order'
+require_relative 'person'
+require_relative 'employee'
 
 class DeliveryBoy < Employee
 
   def initialize(first_name, last_name, password, restaurant)
-    super(username, password, full_name, id)
-    @restaurant = restaurant
+    super(first_name, last_name, password, restaurant)
   end
 
   def list_my_orders
