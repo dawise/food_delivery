@@ -1,6 +1,6 @@
 class Order
 
-attr_accessor :done,
+attr_accessor :done, :late
 
   @@id = 0
 
@@ -31,6 +31,12 @@ attr_accessor :done,
 
   def check_status
     #TODO update @late
+    unless done == true
+      @late = true if @delivery_time < Time.now
+    else
+      @late = true if @delivery_time < #missing variable
+    end
+
     if @late && @done
       "Delivered late"
     elsif @late == false && @done

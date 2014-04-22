@@ -1,15 +1,17 @@
 class Restaurant
 
   attr_reader :name, :location, :phone_number
-  attr_accessor :nb_custumers, :nb_employees, :menu
+  attr_accessor :customers, :menu, :orders
 
-  def intilialize(name, location, phone_number, nb_custumers, nb_employees)
+  def intilialize(name, location, phone_number)
     @name = name
     @location = location
     @phone_number = phone_number
-    @nb_custumers = nb_custumers
-    @nb_employees = nb_employees
     @menu = {}
+    @orders = []
+    @customers = []
+    @delivery_boys = []
   end
+
 
 end
