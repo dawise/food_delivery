@@ -1,7 +1,7 @@
 class Order
 
 attr_accessor :done, :late, :delivery_time
-attr_reader :delivery_boy_id, :id
+attr_reader :delivery_boy_id, :id, :meals
 
   @@id = 0
 
@@ -64,17 +64,27 @@ attr_reader :delivery_boy_id, :id
     end
   end
 
+  def display_meals
+
+    var = []
+
+    @meals.each do |meal, qty|
+      var << "#{meal} : #{qty}"
+    end
+    var.join
+
+  end
 
   def to_s
-    " Order : #{@id}\n
-      Customer : #{@customer_name} \n
-      Customer phone : #{@customer_phone} \n
-      Customer adress : #{@customer_adress} \n
-      Delivery boy : #{@delivery_boy_name} \n
-      Order time : #{@order_time} \n
-      Delivery time : #{@delivery_time} \n
+    " Order : #{@id}
+      Customer : #{@customer_name}
+      Customer phone : #{@customer_phone}
+      Customer adress : #{@customer_adress}
+      Delivery boy : #{@delivery_boy_name}
+      Order time : #{@order_time}
+      Delivery time : #{@delivery_time}
+      Order summary : #{display_meals}"
 
-      "
   end
 
 

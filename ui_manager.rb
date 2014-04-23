@@ -1,82 +1,77 @@
-require_relative 'cookbook'
-require_relative 'controller'
 
-
-class UI
-  TASK = {
-    scrap: "- Scrap Marmiton [scrap]",
-    list: "- List all recipes [list]",
-    add:  "- Add a new recipe [add]",
-    del:  "- Delete a recipe [del]",
+class UIManager
+  TASKS = {
+    list: "- List customers [list]",
+    addc: "- Add customer [addc]",
+    view: "- View orders [view]",
+    addo: "- Add Order [addo]",
+    remove: "- Remove order [remove]",
+    listemp: "- List employees [listemp]",
     exit: "- Exit [exit]"
   }
 
-  def initialize(controller)
-    @controller = controller
+  def initialize(manager, restaurant)
+    @restaurant = restaurant
+    @manager = manager
     @running = true
   end
 
   def list
-    # TODO: call the appropriate controller method with the proper argument(s)
-    # TODO: format and display the retrieved data in a numbered list
-    puts "Your recipes : "
-    @controller.list.each_with_index do |recipe, index|
-      puts "#{index + 1} : #{recipe.name} (#{recipe.prep_time} min)"
-    end
+    puts @manager.list_customers
+  end
+
+  def addc
+    puts "What is the first name of the customer ?"
+    f_name = gets.chomp
+    puts "What is the last name of the customer ?"
+    l_name = gets.chomp
+    @manager.add_customer(f_name,l_name)
+  end
+
+  def view
+    puts "The orders are:"
+    @manager.list_orders
+  end
+
+  def addo
+    puts
+    puts "What's the customer id ?"
+    cust_id = gets.chomp.to_i
+    puts "What's the delivery boy id ?"
+    deliv_id = gets.chomp.to_i
+    order = @manager.add_order(cust_id, deliv_id)
+
+    begin
+      puts @manager.restaurant.menu
+      puts "what dish ?"
+      dish = gets.chomp
+      puts "how many of #{dish} ?"
+      qty = gets.chomp
+      order.add_meal(dish, qty)
+    end until dish == ""
 
   end
 
-  def scrap
-    puts "which ingredient ?"
-    ingredient = gets.chomp
-    @controller.scrap(ingredient)
-    puts "You've just scraped #{ingredient} !"
+  def remove
+    puts "What's the order id ?"
+    order_id = gets.chomp.to_i
+    @manager.remove_order(order_id)
   end
 
-  def add
-    # TODO: ask the user a recipe name
-    puts 'Enter the name of your new recipe'
-    name = gets.chomp
-
-    puts 'Enter the rating of your new recipe'
-    rating = gets.chomp.to_i
-
-    puts 'Enter the cook time of your new recipe'
-    cook_time = gets.chomp.to_i
-
-    puts 'Enter the prep time of your new recipe'
-    prep_time = gets.chomp.to_i
-
-    @controller.add(name, rating, cook_time, prep_time)
-
-    # TODO: call the appropriate controller method with the proper argument(s)
-  end
-
-
-
-  def del
-    # TODO: ask the user a recipe index
-    puts 'Enter the index of the recipe you want to delete'
-    index = gets.chomp.to_i
-    @controller.delete(index - 1)
-    # TODO: call the appropriate controller method with the proper argument(s)
+  def listemp
+    @manager.list_delivery_boys
   end
 
   def exit
-    # TODO: exit the program
     @running = false
-    # Hint: Take a look at the display method !
   end
 
   def user_input
-    # TODO: Get the user input and return it
     gets.chomp
-    # [OPTIONAL] You can think of the case where the user
-    # enters a wrong choice.
   end
 
   def display
-    puts "-- Welcome to the CookBook --"
+    puts "Your options are:"
 
     while @running
       print "\n"
@@ -88,27 +83,12 @@ class UI
     end
   end
 
-  ###
-  ##  You don't need to modify the following methods !
-  ###
   def display_tasks
     puts "What do you want to do? \n"
     puts TASKS.values
   end
 
-  # The dispatch method takes a String or a Symbol as an argument
-  # and calls the method with the same name.
-  #
-  #  Examples:
-  #
-  #   dispatch(:del) => Will call the `del` method in the current class
-  #   dispatch("add") => Will call the `add` method in the current class
-  #
-  # To understand this, read the doc : http://ruby-doc.org/core-2.1.1/Object.html#method-i-send
   def dispatch(task)
     self.send(task.to_sym)
   end
 end
-
-
-

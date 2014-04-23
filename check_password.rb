@@ -1,20 +1,18 @@
-def check_password
-puts  "Please enter your password:"
+def check_password(restaurant)
+  puts "Please enter your password:"
+  access = false
   begin
-
     user_input = gets.chomp
 
-    if array1.each {|manager| manager.password == user_input}
-      access = true
-
-    elsif array2.each {|delivery_boy| delivery_boy.password == user_input}
-      access = true
-
-    else
-      access = false
-      "Your entered a wrong password. Please try again"
+    restaurant.managers.each do |manager|
+      access = true if manager.password == user_input
     end
 
-  end if access
+    restaurant.delivery_boys.each do |delivery_boy|
+      access = true if delivery_boy.password == user_input
+    end
 
+    puts "Your entered a wrong password. Please try again" if access == false
+
+  end until access == true
 end

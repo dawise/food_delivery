@@ -3,7 +3,7 @@ require_relative 'employee'
 
 class DeliveryBoy < Employee
 
-attr_reader :username
+attr_reader :username, :password, :status
 
   def initialize(first_name, last_name, password, restaurant)
     super(first_name, last_name, password, restaurant)
@@ -21,7 +21,6 @@ attr_reader :username
   def order_delivered(order_id)
 
     @restaurant.orders.each do |order|
-
       if order.id == order_id
         order.done = true
         order.delivery_time = Time.now

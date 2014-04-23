@@ -10,10 +10,13 @@ require_relative 'meal'
 require_relative 'order'
 require_relative 'check_username'
 require_relative 'check_password'
+require_relative 'find_object'
+require_relative 'ui_delivery'
+require_relative 'ui_manager'
 
 chez_dede = Restaurant.new("Chez Dédé", "25 rue du Petit Musc", "0147382712")
 
-dede = Manager.new("Dédé", "Lafrite", "azerty", chez_dede)
+dede = Manager.new("Dede", "Lafrite", "azerty", chez_dede)
 
 jacques = dede.add_delivery_boy("Jacques", "Lebon", "blabla")
 nicolas = dede.add_delivery_boy("Nicolas", "Lebrun", "blabla")
@@ -26,7 +29,6 @@ cust2 = dede.add_customer("Robert", "Durand")
 cust2.adress = "14 rue d'Alsace, Paris 3"
 cust2.phone_num = "06 29 58 12 32"
 
-
 chez_dede.menu << Meal.new("Hamburger", 14, "junk-food")
 chez_dede.menu << Meal.new("Pizza royale", 13, "italian")
 chez_dede.menu << Meal.new("Pizza 4 fromages", 12, "italian")
@@ -34,37 +36,33 @@ chez_dede.menu << Meal.new("Jambon beurre", 6, "sandwich")
 chez_dede.menu << Meal.new("Eclair au chocolat", 5, "dessert")
 chez_dede.menu << Meal.new("Glace à la fambroise", 4, "dessert")
 
-puts chez_dede.menu
-
 dede.add_order(4,3).add_meal("Hamburger",2)
 nouvelle_commande = dede.add_order(4,2)
 nouvelle_commande.add_meal("Pizza 4 fromages",4)
-nouvelle_commande
 
-jacques.list_my_orders
-
-nicolas.list_my_orders
-
-nicolas.order_delivered(1)
-
-nicolas.list_my_orders
 
 #########################
 
 print "Welcome to #{chez_dede.name}\n"
 print "-------------------------------\n"
 
-username = check_username
-check_password
+username = check_username(chez_dede)
+check_password(chez_dede)
+
+object = find_object(username, chez_dede)
 
 print "-------------------------------\n"
-print "Welcome, #{}.  Your access level is : #{username}\n"
+print "Welcome, #{username}.  Your access level is : #{object.status}\n"
 print "-------------------------------\n"
 
-print "What would you like to do?\n"
-puts  "Options:
+if object.status == "DELIVERY BOY"
+  delivery_ui = UIDelivery.new(object)
+  delivery_ui.display
+end
 
-# 1. List customers
-# 2. Add customer
-# 3. View orders <customer_id4. Add order <customer_id <employee_id_5. Remove order <order_id6. List employees
-# 7. Log out"
+puts chez_dede.customers
+
+if object.status == "MANAGER"
+  manager_ui = UIManager.new(object, chez_dede)
+  manager_ui.display
+end

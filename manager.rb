@@ -4,7 +4,7 @@ require_relative 'order'
 
 class Manager < Employee
 
-  attr_reader :full_name, :id, :restaurant
+  attr_reader :full_name, :id, :restaurant, :username, :password, :status
 
   def initialize(first_name, last_name, password, restaurant)
     super(first_name, last_name, password, restaurant)
