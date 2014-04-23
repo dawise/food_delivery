@@ -8,6 +8,9 @@ class Manager < Employee
 
   def initialize(first_name, last_name, password, restaurant)
     super(first_name, last_name, password, restaurant)
+    @restaurant.managers << self
+    @username = "#{@first_name.downcase}.#{@last_name.downcase}"
+    @status = "MANAGER"
   end
 
   def add_order(customer_id, delivery_boy)

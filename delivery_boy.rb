@@ -3,8 +3,12 @@ require_relative 'employee'
 
 class DeliveryBoy < Employee
 
+attr_reader :username
+
   def initialize(first_name, last_name, password, restaurant)
     super(first_name, last_name, password, restaurant)
+    @username = "#{@first_name.downcase}.#{@last_name.downcase}"
+    @status = "DELIVERY BOY"
   end
 
   def list_my_orders

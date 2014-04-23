@@ -1,3 +1,5 @@
+########SEED######
+
 require_relative 'person'
 require_relative 'restaurant'
 require_relative 'customer'
@@ -6,6 +8,8 @@ require_relative 'employee'
 require_relative 'manager'
 require_relative 'meal'
 require_relative 'order'
+require_relative 'check_username'
+require_relative 'check_password'
 
 chez_dede = Restaurant.new("Chez Dédé", "25 rue du Petit Musc", "0147382712")
 
@@ -45,3 +49,22 @@ nicolas.order_delivered(1)
 
 nicolas.list_my_orders
 
+#########################
+
+print "Welcome to #{chez_dede.name}\n"
+print "-------------------------------\n"
+
+username = check_username
+check_password
+
+print "-------------------------------\n"
+print "Welcome, #{}.  Your access level is : #{username}\n"
+print "-------------------------------\n"
+
+print "What would you like to do?\n"
+puts  "Options:
+
+# 1. List customers
+# 2. Add customer
+# 3. View orders <customer_id4. Add order <customer_id <employee_id_5. Remove order <order_id6. List employees
+# 7. Log out"

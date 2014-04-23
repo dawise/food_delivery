@@ -1,7 +1,7 @@
 class Restaurant
 
   attr_reader :name, :location, :phone_number
-  attr_accessor :customers, :menu, :orders, :delivery_boys
+  attr_accessor :customers, :menu, :orders, :delivery_boys, :managers
 
   def initialize(name, location, phone_number)
     @name = name
@@ -11,6 +11,7 @@ class Restaurant
     @orders = []
     @customers = []
     @delivery_boys = []
+    @managers = []
   end
 
 
