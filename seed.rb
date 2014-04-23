@@ -18,9 +18,10 @@ olivier = dede.add_customer("Olivier", "Go")
 olivier.adress = "2 place charcot"
 olivier.phone_num = "06 21 58 22 22"
 
-puts dede.list_customers
+cust2 = dede.add_customer("Robert", "Durand")
+cust2.adress = "14 rue d'Alsace, Paris 3"
+cust.phone_num = "06 29 58 12 32"
 
-puts dede.list_delivery_boys
 
 chez_dede.menu << Meal.new("Hamburger", 14, "junk-food")
 chez_dede.menu << Meal.new("Pizza royale", 13, "italian")
