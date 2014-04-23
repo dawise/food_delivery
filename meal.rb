@@ -9,7 +9,7 @@ class Meal
   end
 
   def to_s
-    "#{@name} (#{@type_of_food}) : #{@price}"
+    "#{@name} (#{@type_of_food}) : #{@price}€"
   end
 
 end

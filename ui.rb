@@ -11,9 +11,36 @@ chez_dede = Restaurant.new("Chez Dédé", "25 rue du Petit Musc", "0147382712")
 
 dede = Manager.new("Dédé", "Lafrite", "azerty", chez_dede)
 
-dede.add_delivery_boy("Jacques", "Lebon", "blabla")
-dede.add_delivery_boy("Nicolas", "Lebrun", "blabla")
+jacques = dede.add_delivery_boy("Jacques", "Lebon", "blabla")
+nicolas = dede.add_delivery_boy("Nicolas", "Lebrun", "blabla")
 
-dede.add_customer("Olivier", "Go")
+olivier = dede.add_customer("Olivier", "Go")
+olivier.adress = "2 place charcot"
+olivier.phone_num = "06 21 58 22 22"
 
 puts dede.list_customers
+
+puts dede.list_delivery_boys
+
+chez_dede.menu << Meal.new("Hamburger", 14, "junk-food")
+chez_dede.menu << Meal.new("Pizza royale", 13, "italian")
+chez_dede.menu << Meal.new("Pizza 4 fromages", 12, "italian")
+chez_dede.menu << Meal.new("Jambon beurre", 6, "sandwich")
+chez_dede.menu << Meal.new("Eclair au chocolat", 5, "dessert")
+chez_dede.menu << Meal.new("Glace à la fambroise", 4, "dessert")
+
+puts chez_dede.menu
+
+dede.add_order(4,3).add_meal("Hamburger",2)
+nouvelle_commande = dede.add_order(4,2)
+nouvelle_commande.add_meal("Pizza 4 fromages",4)
+nouvelle_commande
+
+jacques.list_my_orders
+
+nicolas.list_my_orders
+
+nicolas.order_delivered(1)
+
+
+nicolas.list_my_orders

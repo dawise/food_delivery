@@ -2,7 +2,8 @@ require_relative 'person'
 
 class Customer < Person
 
-  attr_reader :full_name
+  attr_reader :full_name, :phone_num, :adress
+  attr_accessor :phone_num, :adress
 
   def initialize(last_name, first_name, password, restaurant)
     super(last_name, first_name, password, restaurant)

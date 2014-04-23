@@ -11,8 +11,9 @@ class Manager < Employee
   end
 
   def add_order(customer_id, delivery_boy)
-    order = Order.new(customer_id, delivery_boy)
+    order = Order.new(customer_id, delivery_boy, @restaurant)
     @restaurant.orders << order
+    order
   end
 
   def remove_order(index)
@@ -27,7 +28,9 @@ class Manager < Employee
   end
 
   def add_customer(first_name, last_name)
-    @restaurant.customers << Customer.new(first_name ,last_name, "nopasswordneeded", @restaurant)
+    new_customer = Customer.new(first_name ,last_name, "nopasswordneeded", @restaurant)
+    @restaurant.customers << new_customer
+    new_customer
   end
 
   def list_customers
@@ -39,7 +42,9 @@ class Manager < Employee
   end
 
   def add_delivery_boy(first_name, last_name, password)
-    @restaurant.delivery_boys << DeliveryBoy.new(first_name, last_name, password, @restaurant)
+    new_boy = DeliveryBoy.new(first_name, last_name, password, @restaurant)
+    @restaurant.delivery_boys << new_boy
+    new_boy
   end
 
 end

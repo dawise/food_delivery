@@ -7,7 +7,7 @@ class Restaurant
     @name = name
     @location = location
     @phone_number = phone_number
-    @menu = {}
+    @menu = []
     @orders = []
     @customers = []
     @delivery_boys = []

@@ -1,10 +1,11 @@
 class Order
 
 attr_accessor :done, :late, :delivery_time
+attr_reader :delivery_boy_id, :id
 
   @@id = 0
 
-  def initialize(customer_id, delivery_boy, restaurant)
+  def initialize(customer_id, delivery_boy_id, restaurant)
     @meals = {}
     @id = @@id + 1
     @@id += 1
@@ -18,14 +19,14 @@ attr_accessor :done, :late, :delivery_time
     @done = false
     @restaurant = restaurant
 
-    @restaurants.customers.each do |customer|
+    @restaurant.customers.each do |customer|
       if @customer_id == customer.id
         @customer_name = customer.full_name
         @customer_phone = customer.phone_num
         @customer_adress = customer.adress
       end
     end
-    @restaurants.delivery_boys.each do |delivery_boy|
+    @restaurant.delivery_boys.each do |delivery_boy|
       if @delivery_boy_id == delivery_boy.id
         @delivery_boy_name = delivery_boy.full_name
       end
@@ -35,7 +36,7 @@ attr_accessor :done, :late, :delivery_time
   def add_meal(meal, quantity)
     @meals[meal] = quantity.to_i
 
-    "You've just added #{quantity} #{meal}"
+    "You've just added #{quantity} #{meal}(s)"
   end
 
   def compute_total_price

@@ -15,7 +15,7 @@ class Person
   end
 
   def to_s
-    "#{@id}: #{@full_name}"
+    "[id: #{@id}] #{@full_name}"
   end
 
 end
